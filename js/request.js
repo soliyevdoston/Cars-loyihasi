@@ -52,7 +52,7 @@ export async function editElement(editedData) {
     throw new Error("Ma'lumotni tahrirlashda xatolik bo'ldi!");
   }
 }
-export async function getByID(id) {
+export async function deleteElement(id) {
   try {
     const token = localStorage.getItem("token");
     await fetch(baseURL + `/cars/${id}`, {
