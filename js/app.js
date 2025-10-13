@@ -19,8 +19,9 @@ setInterval(() => {
   elTimer.innerHTML = time;
 }, 1000);
 
+const worker = new Worker("./worker.js");
+console.log(worker);
+
 elBtn.addEventListener("click", () => {
-  for (let i = 0; i <= 1000000000; i++) {
-    console.log(i);
-  }
+  worker.postMessage("test");
 });
