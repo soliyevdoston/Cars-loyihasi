@@ -29,6 +29,8 @@ import { getAll } from "./request.js";
 // Internet yo'qligida chiqivchi biror narsa
 
 const elOfflinePage = document.getElementById("offlinePage");
+const elFilterTypeSelect = document.getElementById("filterTypeSelect");
+const elFilterValueSelect = document.getElementById("filterValueSelect");
 
 let backendData = null;
 let worker = new Worker("./worker.js");
@@ -50,6 +52,10 @@ window.addEventListener("DOMContentLoaded", () => {
     .catch((error) => {
       alert(error.message);
     });
+});
+
+elFilterTypeSelect.addEventListener("change", (evt) => {
+  console.log(evt.target.value);
 });
 
 worker.addEventListener("message", (evt) => {

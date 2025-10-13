@@ -25,6 +25,26 @@
       </div>
     </div>
 
+    <section>
+      <div class="container mx-auto px-5">
+        <div class="flex items-center gap-5">
+          <select class="select select-primary" id="filterTypeSelect">
+            <option disabled selected>
+              Nima bo'yicha filter qilmoqchisiz?
+            </option>
+            <option value="colorName">Rang</option>
+            <option value="category">Turkum</option>
+            <option value="year">Yil</option>
+            <option value="country">Davlat</option>
+            <option value="maxSpeed">Tezlik</option>
+          </select>
+          <select class="select select-primary hidden" id="filterValueSelect">
+            <option disabled selected>All</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
     <script type="module" src="js/app.js"></script>
   </body>
 </html>
