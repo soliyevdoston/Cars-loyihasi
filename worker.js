@@ -13,13 +13,24 @@ function fiterByType(data, type) {
   return result;
 }
 
+function search(data, key) {
+  const result = [];
+  data.forEach((el) => {
+    if (el.name.toLowerCase().includes(key.toLowerCase())) {
+      result.push(el);
+    }
+  });
+  return result;
+}
+
 const actions = {
   fiterByType,
+  search,
 };
 
 onmessage = (evt) => {
   const func = evt.data.functionName;
   const params = evt.data.params;
   const result = actions[func](...params);
-  postMessage(result);
+  postMessage({ result, target: func });
 };
