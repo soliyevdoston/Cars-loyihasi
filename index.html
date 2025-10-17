@@ -77,6 +77,35 @@
       </div>
     </section>
 
+    <!-- Modals -->
+
+    <dialog id="editModal" class="modal">
+      <div class="modal-box">
+        <h3 class="text-lg font-bold" id="editedElementTitle"></h3>
+        <p class="py-4">Siz shu elementni tahrirlayapsiz</p>
+        <form id="editForm">
+          <input
+            type="text"
+            name="name"
+            placeholder="Mashina nomi"
+            class="input"
+          />
+          <textarea
+            name="description"
+            class="textarea"
+            placeholder="Description"
+          ></textarea>
+          <button class="btn btn-active" type="submit">Tasdiqlash</button>
+        </form>
+        <div class="modal-action">
+          <form method="dialog">
+            <!-- if there is a button in form, it will close the modal -->
+            <button class="btn">Close</button>
+          </form>
+        </div>
+      </div>
+    </dialog>
+
     <!-- Templates -->
     <template id="cardTemplate">
       <div class="card w-96 bg-base-100 card-md shadow-sm">
@@ -118,7 +147,7 @@
                 ></path>
               </svg>
             </button>
-            <button class="btn btn-info js-info">
+            <a class="btn btn-info js-info" target="_blank">
               <svg
                 class="pointer-events-none"
                 width="15"
@@ -134,7 +163,7 @@
                   clip-rule="evenodd"
                 ></path>
               </svg>
-            </button>
+            </a>
           </div>
         </div>
       </div>

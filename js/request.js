@@ -61,7 +61,6 @@ export async function deleteElement(id) {
       },
       method: "DELETE",
     });
-
     return id;
   } catch {
     throw new Error("Ma'lumotni o'chirishda xatolik bo'ldi!");

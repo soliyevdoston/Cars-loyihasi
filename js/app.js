@@ -1,6 +1,7 @@
 import { checkAuth } from "./check-auth.js";
-import { changeLocaleData } from "./local-data.js";
-import { getAll } from "./request.js";
+import { deleteElementLocal, editElementLocal } from "./crud.js";
+import { changeLocaleData, localData } from "./local-data.js";
+import { deleteElement, editElement, getAll } from "./request.js";
 import { ui } from "./ui.js";
 
 // getAll()
@@ -30,7 +31,8 @@ import { ui } from "./ui.js";
 // });
 
 // Internet yo'qligida chiqivchi biror narsa
-
+const elEditModal = document.getElementById("editModal");
+const elEditedForm = document.getElementById("editForm");
 const elContainer = document.getElementById("container");
 const elOfflinePage = document.getElementById("offlinePage");
 const elFilterTypeSelect = document.getElementById("filterTypeSelect");
@@ -41,6 +43,7 @@ let backendData = null;
 let worker = new Worker("./worker.js");
 let filterKey = null;
 let filterValue = null;
+let editedElementId = null;
 
 window.addEventListener("DOMContentLoaded", () => {
   if (window.navigator.onLine === false) {
@@ -48,7 +51,6 @@ window.addEventListener("DOMContentLoaded", () => {
   } else {
     elOfflinePage.classList.add("hidden");
   }
-
   getAll()
     .then((res) => {
       backendData = res;
@@ -73,7 +75,6 @@ elFilterValueSelect.addEventListener("change", (evt) => {
   filterValue = value;
   const elContainer = document.getElementById("container");
   elContainer.innerHTML = null;
-
   if (filterValue && filterKey) {
     getAll(`?${filterKey}=${filterValue}`)
       .then((res) => {
@@ -112,7 +113,6 @@ worker.addEventListener("message", (evt) => {
     });
   } else if (response.target === "search") {
     const elContainer = document.getElementById("container");
-
     elContainer.innerHTML = "";
     if (response.result.length > 0) {
       ui(response.result);
@@ -125,6 +125,7 @@ worker.addEventListener("message", (evt) => {
 window.addEventListener("online", () => {
   elOfflinePage.classList.add("hidden");
 });
+
 window.addEventListener("offline", () => {
   elOfflinePage.classList.remove("hidden");
 });
@@ -133,10 +134,18 @@ window.addEventListener("offline", () => {
 
 elContainer.addEventListener("click", (evt) => {
   const target = evt.target;
+
   // Edit
+
   if (target.classList.contains("js-edit")) {
     if (checkAuth()) {
+      editedElementId = target.id;
+      elEditModal.showModal();
+      const foundElement = localData.find((el) => el.id == target.id);
+      elEditedForm.name.value = foundElement.name;
+      elEditedForm.description.value = foundElement.description;
     } else {
+      window.location.href = "../pages/login.html";
       alert("Ro'yhatdan o'tishingiz kerak");
     }
   }
@@ -147,10 +156,39 @@ elContainer.addEventListener("click", (evt) => {
   }
 
   // Delete
+
   if (target.classList.contains("js-delete")) {
     if (checkAuth() && confirm("Rostdan o'chirmoqchimisiz")) {
+      deleteElement(target.id)
+        .then((id) => {
+          deleteElementLocal(id);
+        })
+        .catch(() => {})
+        .finally(() => {});
     } else {
       alert("Ro'yhatdan o'tishingiz kerak");
+      window.location.href = "../pages/login.html";
     }
+  }
+});
+
+elEditedForm.addEventListener("submit", (evt) => {
+  evt.preventDefault();
+  const formData = new FormData(elEditedForm);
+  const result = {};
+  formData.forEach((value, key) => {
+    result[key] = value;
+  });
+  if (editedElementId) {
+    result.id = editedElementId;
+    editElement(result)
+      .then((res) => {
+        editElementLocal(res);
+      })
+      .catch(() => {})
+      .finally(() => {
+        editedElementId = null;
+        elEditModal.close();
+      });
   }
 });

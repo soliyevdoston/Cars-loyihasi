@@ -1,17 +1,17 @@
-import { changeLocaleData } from "./local-data.js";
+import { changeLocaleData, localData } from "./local-data.js";
 
-export function deleteElementLocal(data, id) {
-  const result = data.filter((el) => el.id !== id);
+export function deleteElementLocal(id) {
+  const result = localData.filter((el) => el.id != id);
   changeLocaleData(result);
 }
 
-export function addElementLocal(data, newData) {
-  const result = [newData, ...data];
+export function addElementLocal(newData) {
+  const result = [newData, ...localData];
   changeLocaleData(result);
 }
 
-export function editElementLocal(data, editedData) {
-  const result = data.map((el) => {
+export function editElementLocal(editedData) {
+  const result = localData.map((el) => {
     if (el.id === editedData.id) {
       return editedData;
     } else {

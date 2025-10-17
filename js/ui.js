@@ -5,6 +5,7 @@ export function ui(data) {
     const clone = document
       .getElementById("cardTemplate")
       .cloneNode(true).content;
+
     const elTitle = clone.querySelector("h2");
     const elDescription = clone.querySelector("p");
     const elInfoBtn = clone.querySelector(".js-info");
@@ -13,7 +14,8 @@ export function ui(data) {
 
     elDeleteBtn.id = el.id;
     elEditBtn.id = el.id;
-    elInfoBtn.id = el.id;
+    elInfoBtn.href = `/pages/details.html?id={}`;
+
     elTitle.innerText = el.name;
     elDescription.innerText = el.description;
 
