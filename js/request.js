@@ -9,15 +9,7 @@ export async function getAll(query = "") {
     throw new Error("Ma'lumotlarni olishda xatolik bo'ldi!");
   }
 }
-export async function getByID(id) {
-  try {
-    const req = await fetch(baseURL + `/cars/${id}`);
-    const res = await req.json();
-    return res;
-  } catch {
-    throw new Error("Ma'lumotni olishda xatolik bo'ldi!");
-  }
-}
+
 export async function addElement(newData) {
   try {
     const token = localStorage.getItem("token");

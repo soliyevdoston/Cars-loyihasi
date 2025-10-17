@@ -2,7 +2,7 @@ import { checkAuth } from "./check-auth.js";
 import { deleteElementLocal, editElementLocal } from "./crud.js";
 import { changeLocaleData, localData } from "./local-data.js";
 import { deleteElement, editElement, getAll } from "./request.js";
-import { ui } from "./ui.js";
+import { pagination, ui } from "./ui.js";
 
 // getAll()
 //   .then((res) => {
@@ -30,6 +30,9 @@ import { ui } from "./ui.js";
 //   worker.postMessage("test");
 // });
 
+const limit = 12;
+let skip = 0;
+
 // Internet yo'qligida chiqivchi biror narsa
 const elEditModal = document.getElementById("editModal");
 const elEditedForm = document.getElementById("editForm");
@@ -51,9 +54,10 @@ window.addEventListener("DOMContentLoaded", () => {
   } else {
     elOfflinePage.classList.add("hidden");
   }
-  getAll()
+  getAll(`?limit=${limit}&skip=${skip}`)
     .then((res) => {
       backendData = res;
+      pagination(backendData.total, backendData.limit, backendData.skip);
       changeLocaleData(backendData.data);
     })
     .catch((error) => {
@@ -189,6 +193,21 @@ elEditedForm.addEventListener("submit", (evt) => {
       .finally(() => {
         editedElementId = null;
         elEditModal.close();
+      });
+  }
+});
+
+const elPagination = document.getElementById("pagination");
+elPagination.addEventListener("click", (evt) => {
+  if (evt.target.classList.contains("js-page")) {
+    skip = evt.target.dataset.skip;
+    getAll(`?limit=${limit}&skip=${skip}`)
+      .then((res) => {
+        ui(res.data);
+        pagination(res.total, res.limit, res.skip);
+      })
+      .catch((error) => {
+        alert(error.message);
       });
   }
 });
