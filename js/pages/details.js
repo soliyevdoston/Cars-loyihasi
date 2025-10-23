@@ -1,5 +1,4 @@
-const elTitle = document.getElementById("name");
-const elDescription = document.getElementById("description");
+const getEl = (id) => document.getElementById(id);
 
 async function getByID(id) {
   document.title = "Yuklanmoqda...";
@@ -14,18 +13,33 @@ async function getByID(id) {
 
 function ui(data) {
   document.title = data.name;
-  elTitle.innerText = data.name;
-  elDescription.innerText = data.description;
+  getEl("name").innerText = data.name;
+  getEl("description").innerText = data.description;
+  getEl("trim").innerText = data.trim;
+  getEl("generation").innerText = data.generation;
+  getEl("year").innerText = data.year;
+  getEl("category").innerText = data.category;
+  getEl("colorName").innerText = data.colorName;
+  getEl("colorBox").style.background = data.color;
+  getEl("doorCount").innerText = data.doorCount;
+  getEl("seatCount").innerText = data.seatCount;
+  getEl("maxSpeed").innerText = data.maxSpeed;
+  getEl("acceleration").innerText = data.acceleration;
+  getEl("engine").innerText = data.engine;
+  getEl("horsepower").innerText = data.horsepower;
+  getEl("fuelType").innerText = data.fuelType;
+  getEl("fuelCity").innerText = data.fuelConsumption.city;
+  getEl("fuelHighway").innerText = data.fuelConsumption.highway;
+  getEl("fuelCombined").innerText = data.fuelConsumption.combined;
+  getEl("country").innerText = data.country;
 }
 
 window.addEventListener("DOMContentLoaded", () => {
   const id = new URLSearchParams(location.search).get("id");
   getByID(id)
-    .then((res) => {
-      ui(res);
-    })
+    .then((res) => ui(res))
     .catch(() => {
-      console.log("salom");
-    })
-    .finally(() => {});
+      document.body.innerHTML =
+        "<h2 class='text-center text-white mt-20'>Ma'lumot topilmadi 😔</h2>";
+    });
 });

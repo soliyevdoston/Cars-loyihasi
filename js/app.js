@@ -334,3 +334,36 @@ elAddCarForm.addEventListener("submit", async (evt) => {
 });
 
 // Cursor is handled by js/cursor.js to avoid duplicate handlers and conflicts
+const loader = document.getElementById("loader");
+
+async function loadCars() {
+  loader.style.display = "flex"; // Loader ko‘rsatish
+
+  try {
+    const req = await fetch("https://json-api.uz/api/project/fn44/cars");
+    const data = await req.json();
+    renderCars(data); // bu sizda allaqachon mavjud funksiyadir
+  } catch (err) {
+    console.error("Ma'lumotni olishda xatolik:", err);
+  } finally {
+    loader.style.display = "none"; // Ma’lumot kelgach loaderni yashirish
+  }
+}
+
+window.addEventListener("DOMContentLoaded", loadCars);
+// === Dark rejim saqlovchi kod (DaisyUI bilan) ===
+const themeToggle = document.getElementById("theme-toggle");
+const savedTheme = localStorage.getItem("theme");
+
+// Avvalgi tanlovni tiklash
+if (savedTheme) {
+  document.documentElement.setAttribute("data-theme", savedTheme);
+  themeToggle.checked = savedTheme !== "light";
+}
+
+// Tugma bosilganda o‘zgartirish
+themeToggle.addEventListener("change", (e) => {
+  const theme = e.target.checked ? "dark" : "light";
+  document.documentElement.setAttribute("data-theme", theme);
+  localStorage.setItem("theme", theme);
+});

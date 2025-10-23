@@ -14,18 +14,61 @@
   </head>
   <body>
     <div class="container">
-      <img
-        id="cursor"
-        class="pointer-events-none select-none absolute !z-[999] -translate-x-2/4 -translate-y-2/4"
-        src="../images/cursor (1).png"
-        alt=""
-        aria-hidden="true"
-        width="32"
-        height="32"
-      />
-      <a href="../index.html">Bosh sahifa</a>
-      <h1 id="name"></h1>
-      <p id="description"></p>
+      <div>
+        <img
+          id="cursor"
+          class="pointer-events-none select-none absolute !z-[999] -translate-x-2/4 -translate-y-2/4"
+          src="../images/cursor (1).png"
+          alt=""
+          aria-hidden="true"
+          width="32"
+          height="32"
+        />
+      </div>
+      <div
+        class="container max-w-2xl p-6 rounded-2xl bg-white/10 backdrop-blur-lg border border-white/20 shadow-xl"
+      >
+        <a
+          href="../index.html"
+          class="btn btn-sm mb-4 bg-white/10 hover:bg-white/20 border-none text-white"
+          >← Bosh sahifa</a
+        >
+
+        <h1 id="name" class="text-3xl font-bold mb-2 text-center"></h1>
+        <p id="description" class="text-center text-gray-300 mb-6"></p>
+
+        <ul class="space-y-2 text-sm">
+          <li><strong>Trim:</strong> <span id="trim"></span></li>
+          <li><strong>Avlod:</strong> <span id="generation"></span></li>
+          <li><strong>Yil:</strong> <span id="year"></span></li>
+          <li><strong>Kategoriya:</strong> <span id="category"></span></li>
+          <li>
+            <strong>Rang:</strong>
+            <span id="colorName"></span>
+            <span
+              id="colorBox"
+              class="inline-block w-5 h-5 rounded ml-2 border border-white"
+            ></span>
+          </li>
+          <li><strong>Eshiklar soni:</strong> <span id="doorCount"></span></li>
+          <li>
+            <strong>O‘rindiqlar soni:</strong> <span id="seatCount"></span>
+          </li>
+          <li><strong>Maks tezlik:</strong> <span id="maxSpeed"></span></li>
+          <li><strong>Tezlanish:</strong> <span id="acceleration"></span></li>
+          <li><strong>Dvigatel:</strong> <span id="engine"></span></li>
+          <li><strong>Ot kuchi:</strong> <span id="horsepower"></span> HP</li>
+          <li><strong>Yoqilg‘i turi:</strong> <span id="fuelType"></span></li>
+          <li><strong>Sarf (shahar):</strong> <span id="fuelCity"></span></li>
+          <li>
+            <strong>Sarf (trassa):</strong> <span id="fuelHighway"></span>
+          </li>
+          <li>
+            <strong>Sarf (umumiy):</strong> <span id="fuelCombined"></span>
+          </li>
+          <li><strong>Davlat:</strong> <span id="country"></span></li>
+        </ul>
+      </div>
     </div>
 
     <script src="../js/pages/details.js" type="module"></script>

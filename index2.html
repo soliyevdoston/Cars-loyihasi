@@ -392,6 +392,16 @@
         transition: width 3s linear;
       }
     </style>
+    <!-- Loading spinner -->
+    <div
+      id="loader"
+      class="fixed inset-0 bg-base-100/80 backdrop-blur-sm flex flex-col items-center justify-center z-[999]"
+    >
+      <span class="loading loading-spinner loading-xl text-primary mb-3"></span>
+      <p class="text-lg font-semibold text-primary">
+        Ma'lumotlar yuklanmoqda...
+      </p>
+    </div>
 
     <script type="module" src="js/app.js"></script>
     <script src="js/cursor.js"></script>
