@@ -1,6 +1,3 @@
-/* Do not hide the system cursor globally.
-   Use the `use-custom-cursor` class on <body> to enable the custom cursor only where you want it. */
-
 body.use-custom-cursor {
   cursor: none !important;
 }
@@ -24,13 +21,12 @@ body.use-custom-cursor {
 .login-btn {
   padding-top: 5px;
 }
-/* Removed global rule that hid the cursor on every element. */
 
 #cursor {
-  position: fixed; /* ekran bo‘yicha joylashadi */
+  position: fixed;
   width: 32px;
   height: 32px;
-  pointer-events: none; /* rasm ustida hover/klik ishlamasligi */
+  pointer-events: none;
   z-index: 9999;
 }
 .container {
@@ -41,7 +37,7 @@ body.use-custom-cursor {
   margin-left: auto;
   margin-right: auto;
 }
-/* When the custom cursor is active, make sure form fields and controls still show appropriate cursors */
+
 body.use-custom-cursor input,
 body.use-custom-cursor textarea,
 body.use-custom-cursor select {
@@ -96,7 +92,7 @@ body.dark {
   background-color: #111;
   color: #f1f1f1;
 }
-/* Toggle tugma (oddiy ko‘rinish uchun) */
+
 .toggle {
   width: 40px;
   height: 20px;

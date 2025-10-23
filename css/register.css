@@ -31,7 +31,6 @@ body {
   pointer-events: none;
 }
 
-/* Asosiy konteyner */
 .register-wrapper {
   display: flex;
   justify-content: center;
@@ -150,13 +149,13 @@ body {
   }
 }
 body {
-  cursor: none; /* standart kursor yashiriladi */
+  cursor: none;
 }
 
 #cursor {
-  position: fixed; /* ekran bo‘yicha joylashadi */
+  position: fixed;
   width: 32px;
   height: 32px;
-  pointer-events: none; /* rasm ustida hover/klik ishlamasligi */
+  pointer-events: none;
   z-index: 999;
 }

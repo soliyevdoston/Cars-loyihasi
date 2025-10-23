@@ -71,14 +71,14 @@ let editedElementId = null;
 
 function warning() {
   const toast = showToast("Iltimos, ro'yxatdan o'ting!", "error");
-  // Wait for toast animation before redirect
+
   setTimeout(() => {
     window.location.href = "../pages/login.html";
     channel1.postMessage({
       action: "redirect",
       address: "../pages/login.html",
     });
-  }, 1500); // Give time to see the toast before redirect
+  }, 1500);
 }
 
 // online offline
@@ -182,7 +182,6 @@ elSearchInput.addEventListener("input", (evt) => {
       params: [backendData.data, key],
     });
   } else {
-    // If search input is empty, show all data
     if (backendData && backendData.data) {
       ui(backendData.data);
     }
@@ -219,7 +218,6 @@ elContainer.addEventListener("click", (evt) => {
     if (checkAuth()) {
       const toast = showToast("O'chirishni tasdiqlang", "info");
 
-      // 3 seconds to cancel
       const deleteTimeout = setTimeout(() => {
         deleteElement(target.id)
           .then((id) => {
@@ -232,7 +230,6 @@ elContainer.addEventListener("click", (evt) => {
           });
       }, 3000);
 
-      // Store timeout ID in toast for cancellation
       toast.dataset.deleteTimeoutId = deleteTimeout;
     } else {
       warning();
@@ -275,7 +272,6 @@ elPagination.addEventListener("click", (evt) => {
   }
 });
 
-// Add Car Modal Handler
 elAddButton.addEventListener("click", () => {
   if (checkAuth()) {
     elAddCarModal.showModal();
@@ -284,12 +280,10 @@ elAddButton.addEventListener("click", () => {
   }
 });
 
-// Add Car Form Handler
 elAddCarForm.addEventListener("submit", async (evt) => {
   evt.preventDefault();
   const formData = getFormData(elAddCarForm);
 
-  // Normalize numeric fields
   const payload = { ...formData };
   ["year", "doorCount", "seatCount", "horsepower", "id"].forEach((k) => {
     if (payload[k] !== undefined && payload[k] !== "") {
@@ -314,18 +308,14 @@ elAddCarForm.addEventListener("submit", async (evt) => {
 
     const result = await response.json();
 
-    // Update local data
     const newData = [...backendData.data, result];
     changeLocaleData(newData);
     backendData.data = newData;
 
-    // Update UI
     ui(newData);
 
-    // Show success message
     showToast("Mashina muvaffaqiyatli qo'shildi", "success");
 
-    // Close modal and reset form
     elAddCarForm.reset();
     elAddCarModal.close();
   } catch (error) {
@@ -333,34 +323,31 @@ elAddCarForm.addEventListener("submit", async (evt) => {
   }
 });
 
-// Cursor is handled by js/cursor.js to avoid duplicate handlers and conflicts
 const loader = document.getElementById("loader");
 
 async function loadCars() {
-  loader.style.display = "flex"; // Loader ko‘rsatish
+  loader.style.display = "flex";
 
   try {
     const req = await fetch("https://json-api.uz/api/project/fn44/cars");
     const data = await req.json();
-    renderCars(data); // bu sizda allaqachon mavjud funksiyadir
+    renderCars(data);
   } catch (err) {
     console.error("Ma'lumotni olishda xatolik:", err);
   } finally {
-    loader.style.display = "none"; // Ma’lumot kelgach loaderni yashirish
+    loader.style.display = "none";
   }
 }
 
 window.addEventListener("DOMContentLoaded", loadCars);
-// === Dark rejim saqlovchi kod (DaisyUI bilan) ===
+
 const themeToggle = document.getElementById("theme-toggle");
 
-// Avval saqlangan rejimni yuklash
 if (localStorage.getItem("theme") === "dark") {
   document.body.classList.add("dark");
   themeToggle.checked = true;
 }
 
-// Bosilganda o‘zgartirish
 themeToggle.addEventListener("change", () => {
   if (themeToggle.checked) {
     document.body.classList.add("dark");

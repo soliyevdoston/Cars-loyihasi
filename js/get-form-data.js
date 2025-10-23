@@ -2,7 +2,6 @@ export function getFormData(form) {
   const formData = new FormData(form);
   const result = {};
   formData.forEach((value, key) => {
-    // handle nested keys like 'fuelConsumption[city]'
     const bracketMatch = key.match(/^(\w+)\[(\w+)\]$/);
     if (bracketMatch) {
       const parent = bracketMatch[1];

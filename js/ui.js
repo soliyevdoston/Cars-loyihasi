@@ -8,7 +8,7 @@ export function ui(data) {
 
     const elTitle = clone.querySelector("h2");
     const elDescription = clone.querySelector("p");
-    // Create info block for additional fields
+
     let infoList = clone.querySelector(".card-info");
     if (!infoList) {
       infoList = document.createElement("div");
@@ -22,11 +22,9 @@ export function ui(data) {
     elEditBtn.id = el.id;
     elInfoBtn.href = `/pages/details.html?id=${el.id}`;
 
-    // Use innerHTML so any HTML in the data is rendered (trusted data expected)
     elTitle.innerHTML = el.name ?? "Ma'lumot mavjud emas";
     elDescription.innerHTML = el.description ?? "Ma'lumot mavjud emas";
 
-    // Build info HTML (with safe fallbacks) to sit directly after the description
     const infoHTML = `
       <div class="mt-2 space-y-1 card-info">
         <div class="text-sm text-muted">📆: <span class="font-medium">${
@@ -47,11 +45,9 @@ export function ui(data) {
       </div>
     `;
 
-    // Insert infoHTML directly after the description element so it's grouped with name/description
     if (elDescription) {
       elDescription.insertAdjacentHTML("afterend", infoHTML);
     } else if (clone.querySelector(".card-body")) {
-      // fallback - append to card body
       clone
         .querySelector(".card-body")
         .insertAdjacentHTML("beforeend", infoHTML);

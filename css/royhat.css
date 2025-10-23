@@ -19,7 +19,6 @@ body {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
 }
 
-/* 🔹 Filter bo‘limidagi umumiy konteyner */
 .container > .flex {
   align-items: center;
   justify-content: space-between;
@@ -27,8 +26,6 @@ body {
   gap: 10px;
 }
 
-/* 🔹 Chap tomondagi select-lar */
-/* Asl select o‘zi (shaffof fon, blur) */
 select.select-primary {
   height: 36px;
   min-width: 160px;
@@ -38,19 +35,17 @@ select.select-primary {
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: #fff;
   padding: 0 10px;
-  appearance: none; /* default arrowni olib tashlash */
+  appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
   transition: all 0.3s ease;
 }
 
-/* Optionlarni qora fon bilan ko‘rsatish */
 select.select-primary option {
-  background-color: #00897b; /* qora fon */
-  color: #fff; /* oq matn */
+  background-color: #00897b;
+  color: #fff;
 }
 
-/* Hover va focus effektlari */
 select.select-primary:hover,
 select.select-primary:focus {
   background: rgba(255, 255, 255, 0.2);
@@ -58,14 +53,12 @@ select.select-primary:focus {
   border-color: rgba(255, 255, 255, 0.3);
 }
 
-/* 🔹 O‘ng tomondagi search input va Add tugmasi */
 .flex.gap-4.items-center {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-/* 🔹 Search input (oynasimon effekt) */
 .input {
   height: 36px;
   border-radius: 10px;
@@ -82,7 +75,6 @@ select.select-primary:focus {
   background: rgba(255, 255, 255, 0.25);
 }
 
-/* 🔹 “Add” tugmasi chap tomonda chiqishi uchun joylashuv */
 #addButton {
   height: 36px;
   display: flex;
@@ -101,7 +93,6 @@ select.select-primary:focus {
   box-shadow: 0 0 12px rgba(0, 255, 204, 0.3);
 }
 
-/* 🔹 Responsiv holat uchun */
 @media (max-width: 768px) {
   .container > .flex {
     flex-direction: column;
