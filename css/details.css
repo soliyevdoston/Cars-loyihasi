@@ -1,0 +1,9 @@
+.container {
+  background: linear-gradient(to left, rgb(1, 59, 32), rgb(3, 141, 95));
+  width: 100%;
+  max-width: 1140px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}

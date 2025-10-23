@@ -10,6 +10,8 @@ body.use-custom-cursor {
 .header {
   display: flex;
   justify-content: space-around;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 .nav {
   display: flex;
@@ -31,7 +33,14 @@ body.use-custom-cursor {
   pointer-events: none; /* rasm ustida hover/klik ishlamasligi */
   z-index: 9999;
 }
-
+.container {
+  width: 100%;
+  max-width: 1140px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
 /* When the custom cursor is active, make sure form fields and controls still show appropriate cursors */
 body.use-custom-cursor input,
 body.use-custom-cursor textarea,
@@ -43,4 +52,34 @@ body.use-custom-cursor button,
 body.use-custom-cursor a,
 body.use-custom-cursor .btn {
   cursor: pointer;
+}
+.obuna {
+  display: flex;
+  gap: 30px;
+  margin-left: 120px;
+}
+.obuna-a {
+  padding-top: 100px;
+}
+.obuna-title {
+  padding-left: 400px;
+  font-size: 40px;
+  padding-bottom: 30px;
+}
+.stats {
+  width: 100%;
+  padding-bottom: 50px;
+  padding-top: 50px;
+}
+.statik-title {
+  padding-left: 400px;
+  font-size: 40px;
+
+  padding-top: 50px;
+}
+body {
+  background-color: #d1d8df;
+}
+.statik {
+  padding-bottom: 50px;
 }

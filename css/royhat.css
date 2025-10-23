@@ -1,3 +1,117 @@
 * {
   cursor: none !important;
 }
+body {
+  background: linear-gradient(to left, rgb(1, 59, 32), rgb(3, 141, 95));
+}
+
+.card-body {
+  padding-bottom: 50px;
+  background: linear-gradient(
+    to left,
+    rgba(1, 59, 32, 0.5),
+    rgba(3, 141, 95, 0.3)
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* 🔹 Filter bo‘limidagi umumiy konteyner */
+.container > .flex {
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* 🔹 Chap tomondagi select-lar */
+/* Asl select o‘zi (shaffof fon, blur) */
+select.select-primary {
+  height: 36px;
+  min-width: 160px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 0 10px;
+  appearance: none; /* default arrowni olib tashlash */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: all 0.3s ease;
+}
+
+/* Optionlarni qora fon bilan ko‘rsatish */
+select.select-primary option {
+  background-color: #00897b; /* qora fon */
+  color: #fff; /* oq matn */
+}
+
+/* Hover va focus effektlari */
+select.select-primary:hover,
+select.select-primary:focus {
+  background: rgba(255, 255, 255, 0.2);
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* 🔹 O‘ng tomondagi search input va Add tugmasi */
+.flex.gap-4.items-center {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 🔹 Search input (oynasimon effekt) */
+.input {
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: black;
+  transition: all 0.3s ease;
+}
+.input input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+.input:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* 🔹 “Add” tugmasi chap tomonda chiqishi uchun joylashuv */
+#addButton {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 15px;
+  border-radius: 10px;
+  background: linear-gradient(to right, #00897b, #00bfa5);
+  border: none;
+  color: white;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+#addButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(0, 255, 204, 0.3);
+}
+
+/* 🔹 Responsiv holat uchun */
+@media (max-width: 768px) {
+  .container > .flex {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  #addButton {
+    width: 100%;
+    justify-content: center;
+  }
+  .input {
+    width: 100%;
+  }
+}

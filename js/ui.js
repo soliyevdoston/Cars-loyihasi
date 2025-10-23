@@ -8,6 +8,12 @@ export function ui(data) {
 
     const elTitle = clone.querySelector("h2");
     const elDescription = clone.querySelector("p");
+    // Create info block for additional fields
+    let infoList = clone.querySelector(".card-info");
+    if (!infoList) {
+      infoList = document.createElement("div");
+      infoList.className = "mt-2 space-y-1 card-info";
+    }
     const elInfoBtn = clone.querySelector(".js-info");
     const elEditBtn = clone.querySelector(".js-edit");
     const elDeleteBtn = clone.querySelector(".js-delete");
@@ -16,8 +22,40 @@ export function ui(data) {
     elEditBtn.id = el.id;
     elInfoBtn.href = `/pages/details.html?id=${el.id}`;
 
-    elTitle.innerText = el.name;
-    elDescription.innerText = el.description;
+    // Use innerHTML so any HTML in the data is rendered (trusted data expected)
+    elTitle.innerHTML = el.name ?? "Ma'lumot mavjud emas";
+    elDescription.innerHTML = el.description ?? "Ma'lumot mavjud emas";
+
+    // Build info HTML (with safe fallbacks) to sit directly after the description
+    const infoHTML = `
+      <div class="mt-2 space-y-1 card-info">
+        <div class="text-sm text-muted">📆: <span class="font-medium">${
+          el.year ?? "Ma'lumot mavjud emas!"
+        }</span></div>
+        <div class="text-sm text-muted">🖌️: <span class="font-medium">${
+          el.colorName ?? "Ma'lumot mavjud emas!"
+        }</span></div>
+        <div class="text-sm text-muted"> 🚀(max): <span class="font-medium">${
+          el.maxSpeed ?? "Ma'lumot mavjud emas!"
+        }</span></div>
+        <div class="text-sm text-muted">🐎 (hp): <span class="font-medium">${
+          el.horsepower ?? "Ma'lumot mavjud emas!"
+        }</span></div>
+        <div class="text-sm text-muted">🛣️: <span class="font-medium">${
+          el.category ?? "Ma'lumot mavjud emas!"
+        }</span></div>
+      </div>
+    `;
+
+    // Insert infoHTML directly after the description element so it's grouped with name/description
+    if (elDescription) {
+      elDescription.insertAdjacentHTML("afterend", infoHTML);
+    } else if (clone.querySelector(".card-body")) {
+      // fallback - append to card body
+      clone
+        .querySelector(".card-body")
+        .insertAdjacentHTML("beforeend", infoHTML);
+    }
 
     elContainer.appendChild(clone);
   });

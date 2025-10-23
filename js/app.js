@@ -4,6 +4,7 @@ import { getFormData } from "./get-form-data.js";
 import { changeLocaleData, localData } from "./local-data.js";
 import { deleteElement, editElement, getAll } from "./request.js";
 import { pagination, ui } from "./ui.js";
+import { showToast } from "./toast.js";
 
 // getAll()
 //   .then((res) => {
@@ -58,6 +59,9 @@ const elFilterValueSelect = document.getElementById("filterValueSelect");
 const elSearchInput = document.getElementById("searchInput");
 const elPagination = document.getElementById("pagination");
 const elCursor = document.getElementById("cursor");
+const elAddButton = document.getElementById("addButton");
+const elAddCarModal = document.getElementById("addCarModal");
+const elAddCarForm = document.getElementById("addCarForm");
 
 let backendData = null;
 let worker = new Worker("./worker.js");
@@ -66,9 +70,15 @@ let filterValue = null;
 let editedElementId = null;
 
 function warning() {
-  window.location.href = "../pages/login.html";
-  channel1.postMessage({ action: "redirect", address: "../pages/login.html" });
-  alert("Ro'yhatdan o'tishingiz kerak");
+  const toast = showToast("Iltimos, ro'yxatdan o'ting!", "error");
+  // Wait for toast animation before redirect
+  setTimeout(() => {
+    window.location.href = "../pages/login.html";
+    channel1.postMessage({
+      action: "redirect",
+      address: "../pages/login.html",
+    });
+  }, 1500); // Give time to see the toast before redirect
 }
 
 // online offline
@@ -155,11 +165,11 @@ elFilterValueSelect.addEventListener("change", (evt) => {
         if (res.data && res.data.length > 0) {
           ui(res.data);
         } else {
-          document.getElementById("noDataModal").showModal();
+          showToast("Ma'lumot topilmadi", "info");
         }
       })
       .catch((error) => {
-        document.getElementById("noDataModal").showModal();
+        showToast("Ma'lumot topilmadi", "info");
       });
   }
 });
@@ -206,14 +216,24 @@ elContainer.addEventListener("click", (evt) => {
   // Delete
 
   if (target.classList.contains("js-delete")) {
-    if (checkAuth() && confirm("Rostdan o'chirmoqchimisiz")) {
-      deleteElement(target.id)
-        .then((id) => {
-          deleteElementLocal(id);
-          channel1.postMessage({ action: "DELETE", address: id });
-        })
-        .catch(() => {})
-        .finally(() => {});
+    if (checkAuth()) {
+      const toast = showToast("O'chirishni tasdiqlang", "info");
+
+      // 3 seconds to cancel
+      const deleteTimeout = setTimeout(() => {
+        deleteElement(target.id)
+          .then((id) => {
+            deleteElementLocal(id);
+            channel1.postMessage({ action: "DELETE", address: id });
+            showToast("Muvaffaqiyatli o'chirildi", "success");
+          })
+          .catch((error) => {
+            showToast(error.message || "O'chirishda xatolik", "error");
+          });
+      }, 3000);
+
+      // Store timeout ID in toast for cancellation
+      toast.dataset.deleteTimeoutId = deleteTimeout;
     } else {
       warning();
     }
@@ -229,8 +249,11 @@ elEditedForm.addEventListener("submit", (evt) => {
       .then((res) => {
         editElementLocal(res);
         channel1.postMessage({ action: "EDIT", address: res });
+        showToast("Muvaffaqiyatli tahrirlandi", "success");
       })
-      .catch(() => {})
+      .catch((error) => {
+        showToast(error.message || "Tahrirlashda xatolik", "error");
+      })
       .finally(() => {
         editedElementId = null;
         elEditModal.close();
@@ -249,6 +272,64 @@ elPagination.addEventListener("click", (evt) => {
       .catch((error) => {
         alert(error.message);
       });
+  }
+});
+
+// Add Car Modal Handler
+elAddButton.addEventListener("click", () => {
+  if (checkAuth()) {
+    elAddCarModal.showModal();
+  } else {
+    warning();
+  }
+});
+
+// Add Car Form Handler
+elAddCarForm.addEventListener("submit", async (evt) => {
+  evt.preventDefault();
+  const formData = getFormData(elAddCarForm);
+
+  // Normalize numeric fields
+  const payload = { ...formData };
+  ["year", "doorCount", "seatCount", "horsepower", "id"].forEach((k) => {
+    if (payload[k] !== undefined && payload[k] !== "") {
+      const n = Number(payload[k]);
+      if (!Number.isNaN(n)) payload[k] = n;
+    }
+  });
+
+  try {
+    const response = await fetch("https://auth-rg69.onrender.com/api/v1/cars", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      throw new Error("Qo'shishda xatolik yuz berdi");
+    }
+
+    const result = await response.json();
+
+    // Update local data
+    const newData = [...backendData.data, result];
+    changeLocaleData(newData);
+    backendData.data = newData;
+
+    // Update UI
+    ui(newData);
+
+    // Show success message
+    showToast("Mashina muvaffaqiyatli qo'shildi", "success");
+
+    // Close modal and reset form
+    elAddCarForm.reset();
+    elAddCarModal.close();
+  } catch (error) {
+    showToast(error.message || "Qo'shishda xatolik", "error");
   }
 });
 

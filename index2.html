@@ -55,33 +55,185 @@
               <option disabled selected>All</option>
             </select>
           </div>
-          <label class="input">
-            <svg
-              class="h-[1em] opacity-50"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-            >
-              <g
-                stroke-linejoin="round"
-                stroke-linecap="round"
-                stroke-width="2.5"
-                fill="none"
-                stroke="currentColor"
+          <div class="flex gap-4 items-center">
+            <label class="input">
+              <svg
+                class="h-[1em] opacity-50"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
               >
-                <circle cx="11" cy="11" r="8"></circle>
-                <path d="m21 21-4.3-4.3"></path>
-              </g>
-            </svg>
-            <input
-              type="search"
-              class="grow"
-              placeholder="Search"
-              id="searchInput"
-            />
-            <kbd class="kbd kbd-sm">⌘</kbd>
-            <kbd class="kbd kbd-sm">K</kbd>
-          </label>
+                <g
+                  stroke-linejoin="round"
+                  stroke-linecap="round"
+                  stroke-width="2.5"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="m21 21-4.3-4.3"></path>
+                </g>
+              </svg>
+              <input
+                type="search"
+                class="grow"
+                placeholder="Search"
+                id="searchInput"
+              />
+              <kbd class="kbd kbd-sm">⌘</kbd>
+              <kbd class="kbd kbd-sm">K</kbd>
+            </label>
+            <button class="btn btn-primary" id="addButton">
+              <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path
+                  fill-rule="evenodd"
+                  d="M10 3a1 1 0 00-1 1v5H4a1 1 0 100 2h5v5a1 1 0 102 0v-5h5a1 1 0 100-2h-5V4a1 1 0 00-1-1z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              Add button
+            </button>
+          </div>
         </div>
+        <dialog id="addCarModal" class="modal !z-[900]">
+          <div class="modal-box max-w-2xl">
+            <h3 class="text-lg font-bold">Yangi mashina qo'shish</h3>
+            <form id="addCarForm" class="py-4 grid grid-cols-2 gap-4">
+              <input
+                type="text"
+                name="name"
+                required
+                placeholder="Mashina nomi"
+                class="input input-bordered w-full"
+              />
+              <input
+                type="text"
+                name="trim"
+                placeholder="Trim (masalan: LT)"
+                class="input input-bordered w-full"
+              />
+              <input
+                type="text"
+                name="generation"
+                placeholder="Generation (masalan: Eighth)"
+                class="input input-bordered w-full"
+              />
+              <input
+                type="number"
+                name="year"
+                required
+                placeholder="Yil (masalan: 2022)"
+                class="input input-bordered w-full"
+              />
+              <input
+                type="color"
+                name="color"
+                title="Rang (hex)"
+                class="w-full h-10"
+              />
+              <input
+                type="text"
+                name="colorName"
+                placeholder="Rang nomi (masalan: Polat ko'k)"
+                class="input input-bordered w-full"
+              />
+              <input
+                type="text"
+                name="category"
+                placeholder="Turkum (masalan: Sedan)"
+                class="input input-bordered w-full"
+              />
+              <input
+                type="number"
+                name="doorCount"
+                placeholder="Eshiklar soni"
+                class="input input-bordered w-full"
+              />
+              <input
+                type="number"
+                name="seatCount"
+                placeholder="O'rindiqlar soni"
+                class="input input-bordered w-full"
+              />
+              <input
+                type="text"
+                name="maxSpeed"
+                placeholder="Maksimal tezlik (masalan: 210 km/h)"
+                class="input input-bordered w-full"
+              />
+              <input
+                type="text"
+                name="acceleration"
+                placeholder="Acceleratsiya (masalan: 0-100 km/h: 8.6s)"
+                class="input input-bordered w-full"
+              />
+              <input
+                type="text"
+                name="engine"
+                placeholder="Dvigatel (masalan: 1.5L Turbo I4)"
+                class="input input-bordered w-full"
+              />
+              <input
+                type="number"
+                name="horsepower"
+                placeholder="Ot kuchi (masalan: 160)"
+                class="input input-bordered w-full"
+              />
+              <input
+                type="text"
+                name="fuelType"
+                placeholder="Yoqilg'i turi (masalan: Benzin)"
+                class="input input-bordered w-full"
+              />
+              <input
+                type="text"
+                name="country"
+                placeholder="Ishlab chiqarilgan mamlakat (masalan: AQSH)"
+                class="input input-bordered w-full"
+              />
+              <textarea
+                name="description"
+                placeholder="Qisqacha tavsif"
+                class="textarea textarea-bordered w-full col-span-2"
+              ></textarea>
+
+              <!-- Fuel consumption grouped fields -->
+              <label class="col-span-2 font-semibold">Fuel consumption</label>
+              <input
+                type="text"
+                name="fuelConsumption[city]"
+                placeholder="City (masalan: 9.2 L/100km)"
+                class="input input-bordered w-full"
+              />
+              <input
+                type="text"
+                name="fuelConsumption[highway]"
+                placeholder="Highway (masalan: 6.7 L/100km)"
+                class="input input-bordered w-full"
+              />
+              <input
+                type="text"
+                name="fuelConsumption[combined]"
+                placeholder="Combined (masalan: 8.1 L/100km)"
+                class="input input-bordered w-full"
+              />
+
+              <!-- ID (optional) -->
+              <input
+                type="number"
+                name="id"
+                placeholder="ID (ixtiyoriy)"
+                class="input input-bordered w-full"
+              />
+
+              <div class="modal-action col-span-2 flex justify-end gap-2 mt-2">
+                <button type="submit" class="btn btn-primary">Saqlash</button>
+                <button type="button" class="btn" onclick="addCarModal.close()">
+                  Qaytish
+                </button>
+              </div>
+            </form>
+          </div>
+        </dialog>
 
         <div class="grid grid-cols-3 gap-5" id="container"></div>
 
@@ -92,7 +244,7 @@
 
     <!-- Modals -->
 
-    <dialog id="noDataModal" class="modal">
+    <dialog id="noDataModal" class="modal !z-[900]">
       <div class="modal-box bg-base-100/80 backdrop-blur">
         <h3 class="text-lg font-bold">Ma'lumot topilmadi</h3>
         <p class="py-4">Qidirilgan ma'lumot bazada mavjud emas</p>
@@ -104,7 +256,7 @@
       </div>
     </dialog>
 
-    <dialog id="editModal" class="modal">
+    <dialog id="editModal" class="modal !z-[900]">
       <div class="modal-box">
         <h3 class="text-lg font-bold" id="editedElementTitle"></h3>
         <p class="py-4">Siz shu elementni tahrirlayapsiz</p>
@@ -130,6 +282,8 @@
         </div>
       </div>
     </dialog>
+
+    <!-- Add Car Modal -->
 
     <!-- Templates -->
     <template id="cardTemplate">
@@ -196,6 +350,48 @@
 
     <!-- Pagination -->
     <div class="join mb-5" id="pagination"></div>
+
+    <!-- Toast Container -->
+    <div
+      id="toastContainer"
+      class="fixed top-4 right-4 z-50 flex flex-col gap-2"
+    ></div>
+
+    <style>
+      /* Toast animations */
+      @keyframes slideIn {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
+      .toast-enter {
+        animation: slideIn 0.3s ease-out;
+      }
+      .toast-exit {
+        animation: fadeOut 0.3s ease-in;
+      }
+      .progress-bar {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 3px;
+        background-color: currentColor;
+        transition: width 3s linear;
+      }
+    </style>
 
     <script type="module" src="js/app.js"></script>
     <script src="js/cursor.js"></script>
