@@ -1,16 +1,26 @@
-const cursorImg = document.getElementById('cursor');
+const cursorImg = document.getElementById("cursor");
 if (cursorImg) {
-  document.body.classList.add('use-custom-cursor');
+  document.body.classList.add("use-custom-cursor");
 
-  // Move immediately on mousemove
-  window.addEventListener('mousemove', (e) => {
-    cursorImg.style.left = e.clientX + 'px';
-    cursorImg.style.top = e.clientY + 'px';
-  });
+  // Asosiy stillarni o'rnatish
+  cursorImg.style.position = "fixed";
+  cursorImg.style.pointerEvents = "none";
+  cursorImg.style.zIndex = "9999";
 
-  // Support touch devices: hide custom cursor
-  window.addEventListener('touchstart', () => {
-    cursorImg.style.display = 'none';
-    document.body.classList.remove('use-custom-cursor');
+  // Sichqoncha harakatini kuzatish
+  function updateCursor(e) {
+    requestAnimationFrame(() => {
+      cursorImg.style.left = e.clientX + "px";
+      cursorImg.style.top = e.clientY + "px";
+    });
+  }
+
+  // Sichqoncha harakatini kuzatish
+  window.addEventListener("mousemove", updateCursor);
+
+  // Touch qurilmalarda yashirish
+  window.addEventListener("touchstart", () => {
+    cursorImg.style.display = "none";
+    document.body.classList.remove("use-custom-cursor");
   });
 }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/royhat.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/daisyui@5"
       rel="stylesheet"
@@ -91,6 +91,18 @@
     </section>
 
     <!-- Modals -->
+
+    <dialog id="noDataModal" class="modal">
+      <div class="modal-box bg-base-100/80 backdrop-blur">
+        <h3 class="text-lg font-bold">Ma'lumot topilmadi</h3>
+        <p class="py-4">Qidirilgan ma'lumot bazada mavjud emas</p>
+        <div class="modal-action">
+          <form method="dialog">
+            <button class="btn">Yopish</button>
+          </form>
+        </div>
+      </div>
+    </dialog>
 
     <dialog id="editModal" class="modal">
       <div class="modal-box">
@@ -186,5 +198,6 @@
     <div class="join mb-5" id="pagination"></div>
 
     <script type="module" src="js/app.js"></script>
+    <script src="js/cursor.js"></script>
   </body>
 </html>

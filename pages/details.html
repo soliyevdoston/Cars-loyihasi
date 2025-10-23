@@ -6,11 +6,26 @@
     <title>Details</title>
     <link rel="stylesheet" href="../css/style.css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
   </head>
   <body>
+    <img
+      id="cursor"
+      class="pointer-events-none select-none absolute !z-[999] -translate-x-2/4 -translate-y-2/4"
+      src="../images/cursor (1).png"
+      alt=""
+      aria-hidden="true"
+      width="32"
+      height="32"
+    />
     <a href="../index.html">Bosh sahifa</a>
     <h1 id="name"></h1>
     <p id="description"></p>
     <script src="../js/pages/details.js" type="module"></script>
+    <script src="../js/app.js" type="module"></script>
   </body>
 </html>

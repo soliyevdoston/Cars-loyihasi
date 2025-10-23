@@ -132,3 +132,14 @@ body {
 .login-box {
   animation: fadeIn 0.5s ease;
 }
+* {
+  cursor: none; /* standart kursor yashiriladi */
+}
+
+#cursor {
+  position: fixed; /* ekran bo‘yicha joylashadi */
+  width: 32px;
+  height: 32px;
+  pointer-events: none; /* rasm ustida hover/klik ishlamasligi */
+  z-index: 9999;
+}

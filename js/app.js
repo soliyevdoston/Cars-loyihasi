@@ -93,19 +93,21 @@ worker.addEventListener("message", (evt) => {
     option.disabled = true;
     option.textContent = "All";
     elFilterValueSelect.appendChild(option);
-    response.result.forEach((el) => {
-      const option = document.createElement("option");
-      option.value = el;
-      option.textContent = el;
-      elFilterValueSelect.appendChild(option);
-    });
+    if (response.result && response.result.length > 0) {
+      response.result.forEach((el) => {
+        const option = document.createElement("option");
+        option.value = el;
+        option.textContent = el;
+        elFilterValueSelect.appendChild(option);
+      });
+    }
   } else if (response.target === "search") {
     const elContainer = document.getElementById("container");
     elContainer.innerHTML = "";
-    if (response.result.length > 0) {
+    if (response.result && response.result.length > 0) {
       ui(response.result);
     } else {
-      alert("No data");
+      document.getElementById("noDataModal").showModal();
     }
   }
 });
@@ -150,20 +152,31 @@ elFilterValueSelect.addEventListener("change", (evt) => {
   if (filterValue && filterKey) {
     getAll(`?${filterKey}=${filterValue}`)
       .then((res) => {
-        ui(res.data);
+        if (res.data && res.data.length > 0) {
+          ui(res.data);
+        } else {
+          document.getElementById("noDataModal").showModal();
+        }
       })
       .catch((error) => {
-        alert(error.message);
+        document.getElementById("noDataModal").showModal();
       });
   }
 });
 
 elSearchInput.addEventListener("input", (evt) => {
-  const key = evt.target.value;
-  worker.postMessage({
-    functionName: "search",
-    params: [backendData.data, key],
-  });
+  const key = evt.target.value.trim();
+  if (key) {
+    worker.postMessage({
+      functionName: "search",
+      params: [backendData.data, key],
+    });
+  } else {
+    // If search input is empty, show all data
+    if (backendData && backendData.data) {
+      ui(backendData.data);
+    }
+  }
 });
 
 // crud

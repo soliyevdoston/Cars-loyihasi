@@ -142,3 +142,14 @@ body {
     transform: translateY(0);
   }
 }
+body {
+  cursor: none; /* standart kursor yashiriladi */
+}
+
+#cursor {
+  position: fixed; /* ekran bo‘yicha joylashadi */
+  width: 32px;
+  height: 32px;
+  pointer-events: none; /* rasm ustida hover/klik ishlamasligi */
+  z-index: 9999;
+}

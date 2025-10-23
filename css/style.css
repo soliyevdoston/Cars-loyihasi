@@ -30,7 +30,6 @@ body.use-custom-cursor {
   height: 32px;
   pointer-events: none; /* rasm ustida hover/klik ishlamasligi */
   z-index: 9999;
-  transform: translate(-50%, -50%);
 }
 
 /* When the custom cursor is active, make sure form fields and controls still show appropriate cursors */
