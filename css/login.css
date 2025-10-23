@@ -100,11 +100,6 @@ body {
   font-weight: 600;
   cursor: pointer;
 }
-.login-box button:hover {
-  transform: scale(1.05);
-  background: linear-gradient(90deg, #2a5298, #1e3c72);
-  box-shadow: 0 0 15px rgba(37, 117, 252, 0.6);
-}
 
 /* link */
 .login-box a {

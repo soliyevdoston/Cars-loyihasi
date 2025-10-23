@@ -30,7 +30,7 @@ elForm.addEventListener("submit", async (evt) => {
 
     if (res.access_token) {
       localStorage.setItem("token", res.access_token);
-      window.location.href = "../../index2.html"; // ✅ o‘tadi
+      window.location.href = "../../index.html"; // ✅ o‘tadi
     } else {
       alert("Login yoki parol noto‘g‘ri!");
     }
