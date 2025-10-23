@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="uz">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Kirish</title>
+    <link rel="stylesheet" href="../css/login.css" />
+  </head>
+  <body>
+    <!-- Gradient background used instead of video -->
+    <div class="login-wrapper">
+      <div class="login-box">
+        <h1>Kirish</h1>
+        <!-- ✅ ID to‘g‘rilandi -->
+        <form id="form">
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Foydalanuvchi nomi"
+            required
+          />
+
+          <!-- password with toggle -->
+          <div class="password-container">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Parol"
+              required
+            />
+            <span id="togglePassword" class="toggle-password">👁️</span>
+          </div>
+
+          <button type="submit">Kirish</button>
+          <p><a href="../pages/register.html">Roʻyxatdan oʻtish</a></p>
+        </form>
+      </div>
+    </div>
+
+    <script type="module" src="../js/pages/login.js"></script>
+  </body>
+</html>

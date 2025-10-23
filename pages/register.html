@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ro'yxatdan o'tish</title>
+    <link rel="stylesheet" href="../css/register.css" />
+  </head>
+  <body>
+    <!-- Gradient background used instead of video -->
+
+    <div class="register-wrapper">
+      <div class="register-box">
+        <h1>Ro'yxatdan o'tish</h1>
+        <form id="registerForm">
+          <input
+            type="text"
+            id="username"
+            placeholder="Foydalanuvchi nomi"
+            required
+          />
+
+          <div class="password-container">
+            <input type="password" id="password" placeholder="Parol" required />
+            <span
+              class="toggle-password"
+              onclick="togglePassword('password', this)"
+              >👁️</span
+            >
+          </div>
+
+          <div class="password-container">
+            <input
+              type="password"
+              id="confirmPassword"
+              placeholder="Parolni tasdiqlang"
+              required
+            />
+            <span
+              class="toggle-password"
+              onclick="togglePassword('confirmPassword', this)"
+              >👁️</span
+            >
+          </div>
+
+          <button type="submit">Ro'yxatdan o'tish</button>
+          <a href="../pages/login.html">Kirish sahifasiga o'tish</a>
+        </form>
+      </div>
+    </div>
+
+    <script src="../js/pages/register.js"></script>
+  </body>
+</html>
