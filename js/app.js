@@ -239,18 +239,4 @@ elPagination.addEventListener("click", (evt) => {
   }
 });
 
-// Cursor
-if (!elCursor) {
-  elCursor = document.createElement("div");
-  elCursor.classList.add("cursor");
-  document.body.appendChild(elCursor);
-}
-document.addEventListener("mousemove", (evt) => {
-  const x = evt.clientX;
-  const y = evt.clientY;
-
-  elCursor.style.cssText = `
-  top:${y}px;
-  left:${x}px;
-  `;
-});
+// Cursor is handled by js/cursor.js to avoid duplicate handlers and conflicts
