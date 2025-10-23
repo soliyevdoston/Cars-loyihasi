@@ -18,7 +18,7 @@ body.use-custom-cursor {
   gap: 10px;
   padding-top: 10px;
 }
-.dark {
+.dark-1 {
   padding-top: 10px;
 }
 .login-btn {
@@ -82,4 +82,48 @@ body {
 }
 .statik {
   padding-bottom: 50px;
+}
+/* Oddiy holat */
+
+/* Dark rejim */
+body {
+  background-color: #d1d8df;
+  color: #000;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+body.dark {
+  background-color: #111;
+  color: #f1f1f1;
+}
+/* Toggle tugma (oddiy ko‘rinish uchun) */
+.toggle {
+  width: 40px;
+  height: 20px;
+  border-radius: 20px;
+  appearance: none;
+  background: #ccc;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.toggle::before {
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+.toggle:checked {
+  background: #4a4a4a;
+}
+
+.toggle:checked::before {
+  transform: translateX(20px);
 }

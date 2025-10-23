@@ -353,17 +353,20 @@ async function loadCars() {
 window.addEventListener("DOMContentLoaded", loadCars);
 // === Dark rejim saqlovchi kod (DaisyUI bilan) ===
 const themeToggle = document.getElementById("theme-toggle");
-const savedTheme = localStorage.getItem("theme");
 
-// Avvalgi tanlovni tiklash
-if (savedTheme) {
-  document.documentElement.setAttribute("data-theme", savedTheme);
-  themeToggle.checked = savedTheme !== "light";
+// Avval saqlangan rejimni yuklash
+if (localStorage.getItem("theme") === "dark") {
+  document.body.classList.add("dark");
+  themeToggle.checked = true;
 }
 
-// Tugma bosilganda o‘zgartirish
-themeToggle.addEventListener("change", (e) => {
-  const theme = e.target.checked ? "dark" : "light";
-  document.documentElement.setAttribute("data-theme", theme);
-  localStorage.setItem("theme", theme);
+// Bosilganda o‘zgartirish
+themeToggle.addEventListener("change", () => {
+  if (themeToggle.checked) {
+    document.body.classList.add("dark");
+    localStorage.setItem("theme", "dark");
+  } else {
+    document.body.classList.remove("dark");
+    localStorage.setItem("theme", "light");
+  }
 });
